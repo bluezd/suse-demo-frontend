@@ -1,0 +1,143 @@
+<!doctype html><html><head>
+<meta name=generator content="Hugo 0.88.1">
+<style type=text/css>@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none!important}ng\:form{display:block}.ng-animate-shim{visibility:hidden}.ng-anchor{position:absolute}</style>
+<meta charset=utf-8>
+<meta name=copyright content="© 2021 SUSE, Inc.">
+<title>SUSE Rancher Demo</title>
+<link rel=icon type=image/png href=https://www.suse.com/favicon.ico>
+<link rel=stylesheet type=text/css href=https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css>
+<link rel=stylesheet type=text/css href=https://use.fontawesome.com/releases/v5.0.8/css/all.css integrity=sha384-3AB7yXWz4OeoZcPbieVW64vVXEwADiYyAEhwilzWsLw+9FgqpyjjStpPnpBO8o8S crossorigin=anonymous>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto&display=swap" rel=stylesheet>
+<link rel=stylesheet href="/css/style.css?ver=1.8">
+<link rel=stylesheet type=text/css href=/css/main.min.9b50515c8acdfbd9c121c83ab3664a650d22fdf08a6b0e05b6419677e18e9e12.css integrity="sha256-m1BRXIrN+9nBIcg6s2ZKZQ0i/fCKaw4FtkGWd+GOnhI=">
+<script src=/js/list.js></script>
+</head>
+<body>
+<navigation>
+<nav class=navigation--component aria-labelledby=mainMenuLabel data-collapse=both>
+<div class=navigation-container>
+<div class=navigation-group>
+<h1 class=navigation-label>SUSE DevOps Demo App</h1>
+</div>
+<div class=navigation-group>
+<a href=https://www.suse.com>
+<img class=navigation-logo alt="SUSE Logo" src=/img/suse-white-logo-green.svg>
+</a>
+</div>
+</div>
+</nav>
+</navigation>
+<div id=content>
+<hero>
+<section class=hero--component>
+<div class=hero-container data-align=center>
+<h2 class="hero-heading page-heading-h2">Kubernetes CI/CD Demo Version - 2</h2>
+<div class=hero-copy>SUSE Rancher DevOps Demo App for listing the latest opensource projects inititated by SUSE.</div>
+</div>
+</section>
+</hero>
+
+<section class="band--layout" data-background="gray" data-collapse="bottom">
+    <div class="band-container" data-layout="stack">
+        <bandheader>
+        <div class="band-header--component">
+            <h3 class="band-header-heading">OpenSouce Project List:</h3>
+        </div>
+    </bandheader>
+        <div class="band-container" data-layout="3-up">
+		  {{range .Items}}
+          <card>
+              <div class="card--component" data-background="white">
+                  <div class="card-header">
+                  {{ $image := .Name }}
+                  {{ $image = print $image ".svg" }}
+                      <a href="{{ with .Website }}{{ . }}{{ else }}{{ .Repository }}{{ end }}"><img class="card-header-img" src="/logos/{{ $image }}" alt="{{ .Name }} logo"></a>
+                  </div>
+                  <div class="card-body" data-align="center">
+                      <p class="card-body-copy">{{ .Description }}</p>
+                  </div>
+                  {{ $uplevel := 3 }}
+                  <div class="card-footer" data-layout="{{ $uplevel }}-up">
+                      {{ with .Website }}
+                      <div class="card-footer-content" data-align="center">
+                          <a class="card-footer-link" href="{{ . }}">
+                              <i class="card-footer-icon fa fa-fw fa-globe"></i>
+                              <br/>
+                              Website
+                          </a>
+                      </div>
+                      {{ end }}
+                      {{ with .Twitter }}
+                      <div class="card-footer-content" data-align="center">
+                          <a class="card-footer-link" href="{{ . }}">
+                              <i class="card-footer-icon fab fa-twitter"></i>
+                              <br/>
+                              Twitter
+                          </a>
+                      </div>
+                      {{ end }}
+                      {{ with .Repository }}
+                      <div class="card-footer-content" data-align="center">
+                          <a class="card-footer-link" href="{{ . }}">
+                              <i class="card-footer-icon fab fa-github"></i>
+                              <br/>
+                              Repo
+                          </a>
+                      </div>
+                      {{ end }}
+                  </div>
+              </div>
+          </card>
+		  {{end}}
+        </div>
+    </div>
+</section>
+
+</div>
+<universalfooter class=ng-isolate-scope>
+<footer class=footer--component xmlns:dc=http://purl.org/dc/elements/1.1/ data-collapse=both>
+<div class=footer-container>
+<a class=footer-logo href=https://www.suse.com><img src=/img/suse-white-logo-green.svg></a>
+<div class=footer-links>
+<span class=footer-link>
+<a class=footer-link-anchor href=https://www.suse.com/company/careers/>
+Careers
+</a>
+</span>
+<span class=footer-link>
+<a class=footer-link-anchor href=https://www.suse.com/company/legal/>
+Legal
+</a>
+</span>
+<span class=footer-link>
+<a class=footer-link-anchor href=https://www.suse.com/#>
+Feedback
+</a>
+</span>
+<span class=footer-link>
+<a class=footer-link-anchor href=https://www.suse.com/company/about/>
+About
+</a>
+</span>
+<span class=footer-link>
+<a class=footer-link-anchor href=https://www.suse.com/company/subscribe/>
+Communications Preferences
+</a>
+</span>
+<span class=footer-link>
+<a class=footer-link-anchor href=https://www.suse.com/contact/>
+Contact Us
+</a>
+</span>
+<span class=footer-link>
+<a class=footer-link-anchor href=https://www.suse.com/#>
+Let's Chat
+</a>
+</span>
+</div>
+<p class=footer-copyright property="dc:rights">Copyright ©<span property="dc:dateCopyrighted">2021</span> <span property="dc:publisher">SUSE</span></p>
+</div>
+</footer>
+</universalfooter>
+</body>
+</html>
