@@ -1,15 +1,18 @@
 README
 --
 
-## docker build
+Suse Stycle DevOps CI/CD Demo.
 
-```
-TAG=`date '+%Y-%m-%d-%H-%M-%S'`
-docker build -t bluezd/suse-demo-frontend:$TAG .
-```
+This is the frontend microservice for displaying the projects by calling RESTful APi with backend https://github.com/bluezd/suse-demo-list-projects
 
-## docker run
+## Architecture
 
-```
-docker run -d -p 32080:8000 -e LIST_PROJECTS_ENDPOINT='http://172.17.0.3:8001/projects' bluezd/suse-demo-frontend:$TAG
-```
+![image](https://user-images.githubusercontent.com/977107/137465403-69686aa4-950c-4fe6-b6a1-c1901907d5ad.png)
+
+## Deploy
+
+  - helm chart
+    - https://github.com/bluezd/suse-demo-frontend-chart
+    - https://github.com/bluezd/suse-demo-list-projects-chart
+  - change the `suse-demo-frontend-chart` `templates/deployment.yaml` `LIST_PROJECTS_ENDPOINT` environment variable accordingly.
+  - helm install
