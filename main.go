@@ -31,7 +31,7 @@ func getEnv(key, fallback string) string {
 	return value
 }
 
-func sayHello(w http.ResponseWriter, r *http.Request) {
+func parseTemplate(w http.ResponseWriter, r *http.Request) {
 	// 解析模板
 	t, err := template.ParseFiles("./templates/index.html")
 	if err != nil {
@@ -74,7 +74,7 @@ func main() {
 	log.Out = os.Stdout
 
 	router := mux.NewRouter()
-	router.HandleFunc("/", sayHello).Methods("GET")
+	router.HandleFunc("/", parseTemplate).Methods("GET")
 	router.PathPrefix("/").Handler(http.StripPrefix("/", http.FileServer(http.Dir("./templates/"))))
 
 	var handler http.Handler = router
