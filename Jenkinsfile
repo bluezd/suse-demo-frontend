@@ -64,6 +64,12 @@ spec:
             }
         }
 
+		stage('Image Vulnerability Scan By NeuVector') {
+			steps {
+				neuvector nameOfVulnerabilityToExemptFour: '', nameOfVulnerabilityToExemptOne: '', nameOfVulnerabilityToExemptThree: '', nameOfVulnerabilityToExemptTwo: '', nameOfVulnerabilityToFailFour: '', nameOfVulnerabilityToFailOne: '', nameOfVulnerabilityToFailThree: '', nameOfVulnerabilityToFailTwo: '', numberOfHighSeverityToFail: '', numberOfMediumSeverityToFail: '1', registrySelection: 'Local', repository: "${DOCKER_REGISTRY}/${PROJECT_NAME}/${APP_NAME}", scanLayers: true, scanTimeout: 10, tag: "v1.0.${env.BUILD_ID}"
+			}
+		}
+
         stage('Push Image') {
             steps {
                 container('docker') {
@@ -73,11 +79,5 @@ spec:
                 }
             }
         }
-
-		stage('Image Vulnerability Scan_By NeuVector') {
-			steps {
-				neuvector nameOfVulnerabilityToExemptFour: '', nameOfVulnerabilityToExemptOne: '', nameOfVulnerabilityToExemptThree: '', nameOfVulnerabilityToExemptTwo: '', nameOfVulnerabilityToFailFour: '', nameOfVulnerabilityToFailOne: '', nameOfVulnerabilityToFailThree: '', nameOfVulnerabilityToFailTwo: '', numberOfHighSeverityToFail: '', numberOfMediumSeverityToFail: '1', registrySelection: 'harbor', repository: "${PROJECT_NAME}/${APP_NAME}", scanLayers: true, scanTimeout: 10, tag: "v1.0.${env.BUILD_ID}"
-			}
-		}
     }
 }
