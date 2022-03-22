@@ -1,0 +1,76 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: suse-demo-frontend-svc
+  namespace: fleet-app
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8000
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    app.kubernetes.io/instance: suse-frontend
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: suse-demo-frontend-dep
+  namespace: fleet-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: suse-frontend
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/instance: suse-frontend
+    spec:
+      imagePullSecrets:
+        - name: harbor
+      securityContext:
+        {}
+      containers:
+        - name: suse-demo-frontend
+          securityContext:
+            {}
+          image: "172.16.99.145:8080/neuvector-demo/suse-demo-frontend:IMAGE_TAG"
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 8000
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 15
+            periodSeconds: 120
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 15
+            periodSeconds: 120
+          resources:
+            {}
+          env:
+            - name: LIST_PROJECTS_ENDPOINT
+              value: "http://suse-backend-suse-demo-list-projects-chart.fleet-app:8001/projects"
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: suse-demo-frontend-ing
+  namespace: fleet-app
+spec:
+  rules:
+    - host: "demo-frontend.caict.poc"
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: suse-demo-frontend-svc
+              servicePort: 8000

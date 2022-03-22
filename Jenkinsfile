@@ -79,5 +79,21 @@ spec:
                 }
             }
         }
+
+        stage('Generate Deploy Yamls') {
+            steps {
+				sh '''
+				  sed -i "s/IMAGE_TAG/${IMAGE_TAG}/g" Template.yaml
+				'''
+            }
+        }
+
+        stage('Deploy to Kubernetes') {
+            steps {
+                container('jnlp') {
+					kubernetesDeploy configs: 'Template.yaml', kubeConfig: [path: ''], kubeconfigId: 'k8s', secretName: '', ssh: [sshCredentialsId: '*', sshServer: ''], textCredentials: [certificateAuthorityData: '', clientCertificateData: '', clientKeyData: '', serverUrl: 'https://']
+                }
+            }
+        }
     }
 }
