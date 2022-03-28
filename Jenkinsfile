@@ -50,7 +50,7 @@ spec:
     environment{
         PROJECT_NAME = "neuvector-demo" 
         APP_NAME = "suse-demo-frontend"
-        DOCKER_REGISTRY = "172.16.99.145:8080"
+        DOCKER_REGISTRY = "10.206.0.8:8080"
         IMAGE_TAG="v1.0.$BUILD_ID"
         IMAGE_NAME_WITH_TAG =  "${DOCKER_REGISTRY}/${PROJECT_NAME}/${APP_NAME}:${IMAGE_TAG}"
     }
@@ -73,7 +73,7 @@ spec:
         stage('Push Image') {
             steps {
                 container('docker') {
-                    withDockerRegistry(credentialsId: 'harbor-admin', url: 'http://172.16.99.145:8080') {
+                    withDockerRegistry(credentialsId: 'harbor-admin', url: 'http://10.206.0.8:8080') {
                         sh 'docker push ${IMAGE_NAME_WITH_TAG}'
                     }
                 }

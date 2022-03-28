@@ -36,7 +36,7 @@ spec:
         - name: suse-demo-frontend
           securityContext:
             {}
-          image: "172.16.99.145:8080/neuvector-demo/suse-demo-frontend:IMAGE_TAG"
+          image: "10.206.0.8:8080/neuvector-demo/suse-demo-frontend:IMAGE_TAG"
           imagePullPolicy: Always
           ports:
             - name: http
